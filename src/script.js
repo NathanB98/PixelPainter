@@ -10,6 +10,7 @@ const COLOUR_WHEEL = document.querySelector('.colour-wheel');
 let gridLength = 16;
 let gridVolume = gridLength * gridLength;
 let currentMode = 'brush';
+let currentColour = '#000000';
 
 let mouseDown = false;
 document.body.onmousedown = () => (mouseDown = true);
@@ -25,11 +26,15 @@ GRID_SIZE_SLIDER.oninput = function() {
     gridVolume = gridLength * gridLength;
     clearGrid();
 }
-//COLOUR_WHEEL.oninput = () => changeBrushColour();
+COLOUR_WHEEL.oninput = () => changeBrushColour();
 CLEAR_BUTTON.onclick = () => clearGrid();
 BRUSH_BUTTON.onclick = () => setPaintMode('brush');
 RAINBOW_BUTTON.onclick = () => setPaintMode('rainbow');
 ERASER_BUTTON.onclick = () => setPaintMode('eraser');
+
+function changeBrushColour() {
+    currentColour = COLOUR_WHEEL.value;
+}
 
 /* Paints the appropriate brush type to the canvas depending on the users choice of mode. Either brush, rainbow, or an eraser. */
 function changeBrushMode(e) {
@@ -40,7 +45,7 @@ function changeBrushMode(e) {
         const randomB = Math.floor(Math.random() * 256);
         e.target.style.backgroundColor = `rgb(${randomR}, ${randomG}, ${randomB})`
     } else if(currentMode === 'brush') {
-        e.target.style.backgroundColor = 'black';
+        e.target.style.backgroundColor = currentColour;
     } else if(currentMode === 'eraser') {
         e.target.style.backgroundColor = '#FFFFFF';
     }

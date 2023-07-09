@@ -5,6 +5,7 @@ const GRID_SIZE_DISPLAY = document.querySelector('.size-display');
 const BRUSH_BUTTON = document.querySelector('.brush-btn');
 const RAINBOW_BUTTON = document.querySelector('.rainbow-btn');
 const ERASER_BUTTON = document.querySelector('.eraser-btn');
+const COLOUR_WHEEL = document.querySelector('.colour-wheel');
 
 let gridLength = 16;
 let gridVolume = gridLength * gridLength;
@@ -14,6 +15,8 @@ let mouseDown = false;
 document.body.onmousedown = () => (mouseDown = true);
 document.body.onmouseup = () => (mouseDown = false);
 
+
+
 /* Changes the size of the canvas grid to a size given by the user via a slider element. Resizing clears the grid.
 Minimum size: 1x1, Maximum size: 64x64. */
 GRID_SIZE_SLIDER.oninput = function() {
@@ -22,13 +25,14 @@ GRID_SIZE_SLIDER.oninput = function() {
     gridVolume = gridLength * gridLength;
     clearGrid();
 }
+//COLOUR_WHEEL.oninput = () => changeBrushColour();
 CLEAR_BUTTON.onclick = () => clearGrid();
 BRUSH_BUTTON.onclick = () => setPaintMode('brush');
 RAINBOW_BUTTON.onclick = () => setPaintMode('rainbow');
 ERASER_BUTTON.onclick = () => setPaintMode('eraser');
 
 /* Paints the appropriate brush type to the canvas depending on the users choice of mode. Either brush, rainbow, or an eraser. */
-function changeBrushColour(e) {
+function changeBrushMode(e) {
     if(e.type === 'mouseover' && !mouseDown) return;
     if(currentMode === 'rainbow') {
         const randomR = Math.floor(Math.random() * 256);
@@ -76,8 +80,8 @@ function generateCanvasGrid(volume) {
         let gridSquare = document.createElement('div');
 
         gridSquare.classList.add('grid-square');
-        gridSquare.addEventListener('mousedown', changeBrushColour);
-        gridSquare.addEventListener('mouseover', changeBrushColour);
+        gridSquare.addEventListener('mousedown', changeBrushMode);
+        gridSquare.addEventListener('mouseover', changeBrushMode);
         GRID_CONTAINER.appendChild(gridSquare);
     }
 }

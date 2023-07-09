@@ -16,8 +16,6 @@ let mouseDown = false;
 document.body.onmousedown = () => (mouseDown = true);
 document.body.onmouseup = () => (mouseDown = false);
 
-
-
 /* Changes the size of the canvas grid to a size given by the user via a slider element. Resizing clears the grid.
 Minimum size: 1x1, Maximum size: 64x64. */
 GRID_SIZE_SLIDER.oninput = function() {
@@ -55,12 +53,21 @@ function setPaintMode(mode) {
     switch(mode) {
         case 'brush':
             currentMode = 'brush';
+            BRUSH_BUTTON.style.border = 'solid 5px #708090';
+            RAINBOW_BUTTON.style.border = 'solid 2px #708090';
+            ERASER_BUTTON.style.border = 'solid 2px #708090';
             break;
         case 'rainbow':
             currentMode = 'rainbow';
+            BRUSH_BUTTON.style.border = 'solid 2px #708090';
+            RAINBOW_BUTTON.style.border = 'solid 5px #708090';
+            ERASER_BUTTON.style.border = 'solid 2px #708090';
             break;
         case 'eraser':
             currentMode = 'eraser';
+            BRUSH_BUTTON.style.border = 'solid 2px #708090';
+            RAINBOW_BUTTON.style.border = 'solid 2px #708090';
+            ERASER_BUTTON.style.border = 'solid 5px #708090';
             break;
     }
 }

@@ -11,6 +11,9 @@ function generateCanvasGrid(volume) {
         let gridSquare = document.createElement('div');
 
         gridSquare.classList.add('grid-square');
+        gridSquare.addEventListener('mouseover', () => {
+            gridSquare.style.backgroundColor = 'black';
+        });
         GRID_CONTAINER.appendChild(gridSquare);
     }
 }
